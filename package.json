@@ -26,5 +26,19 @@
             "android",
             "browser"
         ]
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.4",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "css-loader": "^0.28.11",
+        "npm-run-all": "^4.1.2",
+        "pug": "^2.0.3",
+        "stylus": "^0.54.5",
+        "stylus-loader": "^3.0.2",
+        "uglify-js": "^3.3.22",
+        "vue-loader": "^14.2.2",
+        "vue-template-compiler": "^2.5.16"
     }
 }
