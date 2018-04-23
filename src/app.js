@@ -19,14 +19,15 @@ const router = new VueRouter({
   mode: "history",
 })
 
-// element-ui
-// import ElementUI from "element-ui"
-// Vue.use(ElementUI)
+// mint-ui
+import MintUI from "mint-ui"
+import "mint-ui/lib/style.css"
+Vue.use(MintUI)
 
 // root
 new Vue({
   router,
-  store,
+  // store,
   el: "#app",
   render: (h) => h("router-view"),
 })

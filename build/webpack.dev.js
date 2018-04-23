@@ -5,7 +5,7 @@ const path = require("path")
 module.exports = merge(common, {
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "../web"),
+    contentBase: path.join(__dirname, "../www"),
     historyApiFallback: true,
     publicPath: "/js/",
   },
