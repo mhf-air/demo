@@ -1,0 +1,5 @@
+node_modules/*
+yarn-error.log
+platforms/*
+plugins/*
+www/js/app.js
