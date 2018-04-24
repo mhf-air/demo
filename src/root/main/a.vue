@@ -78,10 +78,12 @@ export default {
     },
 
     selectFile() {
-      Toast("file")
+      function onError(error) {
+        Toast(`Failed because: ${error}`)
+      }
       window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (fs) => {
         Toast(`file system open ${fs.name}`)
-      }, onErrorLoadFs)
+      }, onError)
     },
 
   },
