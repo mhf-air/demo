@@ -5,6 +5,8 @@ div
 </template>
 
 <script>
+import { Toast } from "mint-ui"
+
 export default {
   data(){
     return {
@@ -14,21 +16,22 @@ export default {
   methods: {
     getLocation(){
       function onSuccess(pos) {
-        console.log(`
+        Toast("onSuccess")
+        Toast(`
           Latitude: ${pos.coords.latitude},
           Longitude: ${pos.coords.longitude}
         `)
       }
 
       function onError(error) {
-        console.log(`
+        Toast("onError")
+        Toast(`
           code: ${error.code}, 
           message: ${error.message}
         `)
       }
 
       navigator.geolocation.getCurrentPosition(onSuccess, onError)
-      console.log("nice")
     },
   },
 }
