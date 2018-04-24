@@ -1,7 +1,6 @@
 <template lang="pug">
-div
-  mt-button(type="primary" @click="getLocation") primary
-  mt-button(type="danger") danger
+div.root.g-v.j-c-center
+  mt-button(type="primary" @click="getLocation") 获取位置
 </template>
 
 <script>
@@ -32,6 +31,7 @@ export default {
 
       navigator.geolocation.getCurrentPosition(onSuccess, onError, {
         timeout: 3000,
+        enableHighAccuracy: true,
       })
     },
   },
@@ -39,4 +39,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.g-h
+  display: flex
+
+.g-v
+  display: flex
+  flex-direction: column
+
+.j-c-center
+  justify-content: center
+
+.a-i-center
+  align-items: center
+
+.root
+  margin: 3rem 3rem
+
 </style>
