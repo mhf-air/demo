@@ -14,6 +14,11 @@ div.root.g-v.j-c-center
 <script>
 import { Toast } from "mint-ui"
 
+// for debug
+function showKeys(a) {
+  Toast(Object.keys(a).join(" "))
+}
+
 export default {
   data(){
     return {
@@ -78,12 +83,26 @@ export default {
     },
 
     selectFile() {
+      let dirList = []
+      let fileList = []
+      function addFileEntry(entry) {
+        let dirReader = dirEntry.createReader
+        dirReader.readEntries((entryList) => {
+          for(let i = 0; i < entryList.length; i++) {
+            if (entryList[i].isDirectory) {
+              // addFileEntry(entryList[i])
+              dirList.push(entryList[i])
+            } else {
+              fileList.push(entryList[i])
+            }
+          }
+          Toast(`dir: ${dirList.join(" ")}, file: ${fileList.join(" ")}`)
+        })
+      }
       function onError(error) {
         Toast(`Failed because: ${error}`)
       }
-      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (fs) => {
-        Toast(`file system open ${fs.name}`)
-      }, onError)
+      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, addFileEntry, onError)
     },
 
   },
