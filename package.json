@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "webpack-dev-server --config build/webpack.dev.js --open",
         "dev-js": "webpack --config build/webpack.dev.js",
-        "dev-b": "cordova run browser",
+        "dev-b": "yarn run dev-js && cordova run browser",
         "dev-a": "cordova run android",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -17,6 +17,7 @@
         "axios": "^0.18.0",
         "cordova-android": "^7.0.0",
         "cordova-browser": "^5.0.3",
+        "cordova-plugin-geolocation": "^4.0.1",
         "cordova-plugin-whitelist": "^1.3.3",
         "mint-ui": "^2.2.13",
         "vue": "^2.5.16",
@@ -25,7 +26,8 @@
     },
     "cordova": {
         "plugins": {
-            "cordova-plugin-whitelist": {}
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-geolocation": {}
         },
         "platforms": [
             "android",
