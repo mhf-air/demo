@@ -10,13 +10,13 @@ import { Toast } from "mint-ui"
 export default {
   data(){
     return {
-      choice: "",
+      content: "hello",
     }
   },
   methods: {
     getLocation(){
+      let self = this
       function onSuccess(pos) {
-        Toast("onSuccess")
         Toast(`
           Latitude: ${pos.coords.latitude},
           Longitude: ${pos.coords.longitude}
@@ -24,14 +24,15 @@ export default {
       }
 
       function onError(error) {
-        Toast("onError")
         Toast(`
-          code: ${error.code}, 
+          code: ${error.code},
           message: ${error.message}
         `)
       }
 
-      navigator.geolocation.getCurrentPosition(onSuccess, onError)
+      navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+        timeout: 3000,
+      })
     },
   },
 }
