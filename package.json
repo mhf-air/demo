@@ -8,7 +8,7 @@
         "dev": "webpack-dev-server --config build/webpack.dev.js --open",
         "dev-js": "webpack --config build/webpack.dev.js",
         "dev-b": "yarn run dev-js && cordova run browser",
-        "dev-a": "cordova run android",
+        "dev-a": "yarn run dev-js && cordova run android",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Apache Cordova Team",
