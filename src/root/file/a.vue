@@ -11,6 +11,7 @@ div.root.g-v.j-c-center
         span(v-if="item.isDir") d
         span(v-else) f
         span {{ item.name }}
+  p(v-if="fileContent !== ''") {{ fileContent }}
 </template>
 
 <script>
@@ -19,10 +20,38 @@ import { Toast } from "mint-ui"
 let historyStack = []
 let currentURL = ""
 
+function writeFile(fileEntry, data, onSuccess, onError) {
+  fileEntry.createWriter((fileWriter) => {
+    fileWriter.onwriteend = onSuccess
+    if (!onError) {
+      fileWriter.onerror = (e) => {
+        console.log("Failed file write: " + e.toString())
+      }
+    }
+    let newData = new Blob([data], { type: "text/plain" })
+    fileWriter.write(newData)
+  })
+}
+
+function readFile(fileEntry, onSuccess, onError) {
+  if (!onError) {
+    onError = function(error) {
+      console.log(`Failed because: ${error}`)
+    }
+  }
+
+  fileEntry.file((f) => {
+    let reader = new FileReader()
+    reader.onloadend = onSuccess
+    reader.readAsText(f)
+  }, onError)
+}
+
 export default {
   data() {
     return {
       entryList: [],
+      fileContent: "",
     }
   },
   methods: {
@@ -57,7 +86,17 @@ export default {
         this.listFiles(item.nativeURL)
         historyStack.push(this.currentURL)
       } else {
-        Toast(item.name)
+        let onError = function(error) {
+          console.log(`Failed because: ${error}`)
+        }
+        let self = this
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (localFs) => {
+          localFs.root.getFile("hello.txt", {}, (fileEntry) => {
+            readFile(fileEntry, function() {
+              self.fileContent = this.result
+            })
+          }, onError)
+        }, onError)
       }
     },
 
@@ -75,14 +114,18 @@ export default {
       function onError(error) {
         console.log(`Failed because: ${error}`)
       }
+      let self = this
 
       window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (localFs) => {
         localFs.root.getFile("hello.txt", {
           create: true,
           exclusive: false,
         }, (fileEntry) => {
-          console.log(`is file? ${fileEntry.isFile.toString()}`)
-          writeFile(fileEntry, null)
+          writeFile(fileEntry, "hello", () => {
+            readFile(fileEntry, function() {
+              self.fileContent = this.result
+            })
+          })
         }, onError)
       }, onError)
     },
