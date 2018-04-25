@@ -9,10 +9,13 @@ div.root.g-v.j-c-center
       width="100%"
       )
   mt-button.button(type="primary" @click="selectFile") 选择文件
+  div#map
 </template>
 
 <script>
 import { Toast } from "mint-ui"
+
+let mp = null
 
 export default {
   data(){
@@ -20,13 +23,21 @@ export default {
       imgSrc: "",
     }
   },
+  mounted() {
+    mp = new BMap.Map("map")
+    let point = new BMap.Point(116.404, 39.915)
+    mp.centerAndZoom(point, 11)
+    mp.enableScrollWheelZoom()
+  },
   methods: {
     getLocation() {
       function onSuccess(pos) {
-        Toast(`
-          Latitude: ${pos.coords.latitude},
+        /* Toast(`
           Longitude: ${pos.coords.longitude}
-        `)
+          Latitude: ${pos.coords.latitude},
+        `) */
+        let point = new BMap.Point(pos.coords.longitude, pos.coords.latitude)
+        mp.centerAndZoom(point, 10)
       }
 
       function onError(error) {
@@ -109,5 +120,8 @@ export default {
 
 .button
   margin: 1rem 0
+
+#map
+  height: 300px
 
 </style>
