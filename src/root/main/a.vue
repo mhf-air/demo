@@ -28,6 +28,7 @@ export default {
     let point = new BMap.Point(116.404, 39.915)
     mp.centerAndZoom(point, 11)
     mp.enableScrollWheelZoom()
+    mp.addControl(new BMap.NavigationControl())
   },
   methods: {
     getLocation() {
