@@ -28,7 +28,6 @@ export default {
     let point = new BMap.Point(116.404, 39.915)
     mp.centerAndZoom(point, 11)
     mp.enableScrollWheelZoom()
-    mp.addControl(new BMap.NavigationControl())
   },
   methods: {
     getLocation() {
@@ -38,7 +37,7 @@ export default {
           Latitude: ${pos.coords.latitude},
         `) */
         let point = new BMap.Point(pos.coords.longitude, pos.coords.latitude)
-        mp.centerAndZoom(point, 10)
+        mp.centerAndZoom(point, 15)
       }
 
       function onError(error) {
