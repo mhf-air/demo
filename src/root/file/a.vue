@@ -1,6 +1,7 @@
 <template lang="pug">
 div.root.g-v.j-c-center
-  mt-button(type="primary" @click="$router.go(-1)") back
+  mt-button(type="primary" @click="back") back
+  mt-button(type="danger" @click="addFile") add a file
   ul
     li.list-item(
         v-for="(item, i) in entryList"
@@ -14,6 +15,9 @@ div.root.g-v.j-c-center
 
 <script>
 import { Toast } from "mint-ui"
+
+let historyStack = []
+let currentURL = ""
 
 export default {
   data() {
@@ -50,22 +54,43 @@ export default {
 
     click(item) {
       if (item.isDir) {
-        console.log(item.nativeURL)
         this.listFiles(item.nativeURL)
-        /* this.$router.push({
-          path: "/file",
-          query: {
-            dir: item.nativeURL,
-          },
-        }) */
+        historyStack.push(this.currentURL)
       } else {
         Toast(item.name)
       }
     },
 
+    back() {
+      if (historyStack.length === 0) {
+        this.$router.go(-1)
+      } else {
+        let oldURL = historyStack.pop()
+        console.log("old url is: " + oldURL)
+        this.listFiles(oldURL)
+      }
+    },
+
+    addFile() {
+      function onError(error) {
+        console.log(`Failed because: ${error}`)
+      }
+
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (localFs) => {
+        localFs.root.getFile("hello.txt", {
+          create: true,
+          exclusive: false,
+        }, (fileEntry) => {
+          console.log(`is file? ${fileEntry.isFile.toString()}`)
+          writeFile(fileEntry, null)
+        }, onError)
+      }, onError)
+    },
+
   },
   created() {
     this.listFiles(this.$route.query.dir)
+    this.currentURL = this.$route.query.dir
   },
 }
 </script>

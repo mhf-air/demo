@@ -14,11 +14,6 @@ div.root.g-v.j-c-center
 <script>
 import { Toast } from "mint-ui"
 
-// for debug
-function showKeys(a) {
-  Toast(Object.keys(a).join(" "))
-}
-
 export default {
   data(){
     return {
