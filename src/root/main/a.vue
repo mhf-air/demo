@@ -83,26 +83,12 @@ export default {
     },
 
     selectFile() {
-      let dirList = []
-      let fileList = []
-      function addFileEntry(entry) {
-        let dirReader = dirEntry.createReader
-        dirReader.readEntries((entryList) => {
-          for(let i = 0; i < entryList.length; i++) {
-            if (entryList[i].isDirectory) {
-              // addFileEntry(entryList[i])
-              dirList.push(entryList[i])
-            } else {
-              fileList.push(entryList[i])
-            }
-          }
-          Toast(`dir: ${dirList.join(" ")}, file: ${fileList.join(" ")}`)
-        })
-      }
-      function onError(error) {
-        Toast(`Failed because: ${error}`)
-      }
-      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, addFileEntry, onError)
+      this.$router.push({
+        path: "/file",
+        query: {
+          dir: cordova.file.dataDirectory,
+        },
+      })
     },
 
   },
