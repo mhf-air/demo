@@ -30,9 +30,9 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-geolocation": {},
             "cordova-plugin-camera": {},
-            "cordova-plugin-file": {}
+            "cordova-plugin-file": {},
+            "cordova-plugin-geolocation": {}
         },
         "platforms": [
             "android",
@@ -45,6 +45,7 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "css-loader": "^0.28.11",
+        "debug": "^3.1.0",
         "is-buffer": "^2.0.2",
         "npm-run-all": "^4.1.2",
         "pug": "^2.0.3",

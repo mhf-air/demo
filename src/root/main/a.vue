@@ -30,24 +30,18 @@ export default {
     mp.enableScrollWheelZoom()
   },
   methods: {
-    getLocation(tryNum) {
-      if (!tryNum) {
-        tryNum = 0
-      } else {
-        tryNum++
-      }
+    getLocation() {
       let self = this
       let threshold = 300
-      let maxTryNum = 10
       function onSuccess(pos) {
-        if (pos.coords.accuracy > threshold && tryNum < maxTryNum) {
-          setTimeout(()={
-            self.getLocation(tryNum)
+        if (pos.coords.accuracy > threshold) {
+          setTimeout(() => {
+            self.getLocation()
           }, 100)
           return
         }
 
-        // Toast(`accuracy: ${pos.coords.accuracy}`)
+        Toast(`accuracy: ${pos.coords.accuracy}`)
         let point = new BMap.Point(pos.coords.longitude, pos.coords.latitude)
         mp.centerAndZoom(point, 15)
 
@@ -55,11 +49,6 @@ export default {
           if (data.status === 0) {
             let marker = new BMap.Marker(data.points[0])
             mp.addOverlay(marker)
-            let label = new BMap.Label("right", {
-              offset: new BMap.Size(20, -10),
-            })
-            marker.setLabel(label)
-            mp.setCenter(data.points[0])
           }
         }
         let converter = new BMap.Convertor()
@@ -67,12 +56,17 @@ export default {
         pointArr.push(point)
         converter.translate(pointArr, 3, 5, translate)
 
-        let marker = new BMap.Marker(point)
+        /* let marker = new BMap.Marker(point)
         mp.addOverlay(marker)
+        let label = new BMap.Label("right", {
+          offset: new BMap.Size(20, -10),
+        })
+        marker.setLabel(label)
+        mp.setCenter(data.points[0]) */
       }
 
       function onError(error) {
-        Toast(`
+        console.log(`
           code: ${error.code},
           message: ${error.message}
         `)
