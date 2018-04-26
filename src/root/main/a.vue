@@ -32,23 +32,24 @@ export default {
   methods: {
     getLocation() {
       let self = this
-      let threshold = 300
+      // let threshold = 300
       function onSuccess(pos) {
-        if (pos.coords.accuracy > threshold) {
+        /* if (pos.coords.accuracy > threshold) {
           setTimeout(() => {
             self.getLocation()
           }, 100)
           return
-        }
+        } */
 
         Toast(`accuracy: ${pos.coords.accuracy}`)
         let point = new BMap.Point(pos.coords.longitude, pos.coords.latitude)
-        mp.centerAndZoom(point, 15)
 
         let translate = (data) => {
           if (data.status === 0) {
-            let marker = new BMap.Marker(data.points[0])
+            let newPoint = data.points[0]
+            let marker = new BMap.Marker(newPoint)
             mp.addOverlay(marker)
+            mp.centerAndZoom(newPoint, 15)
           }
         }
         let converter = new BMap.Convertor()
