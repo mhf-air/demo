@@ -10,6 +10,12 @@ div.root.g-v.j-c-center
       )
   mt-button.button(type="primary" @click="selectFile") 选择文件
   div#map
+  div.g-h.lst
+    div(
+        v-for="(item, i) in lst"
+        :key="i"
+        )
+        | {{ item }}
 </template>
 
 <script>
@@ -21,6 +27,7 @@ export default {
   data(){
     return {
       imgSrc: "",
+      lst: [],
     }
   },
   mounted() {
@@ -31,13 +38,37 @@ export default {
   },
   methods: {
     getLocation() {
+      let self = this
+      let threshold = 300
       function onSuccess(pos) {
-        /* Toast(`
-          Longitude: ${pos.coords.longitude}
-          Latitude: ${pos.coords.latitude},
-        `) */
+        self.lst.push(pos.coords.accuracy)
+        if (pos.coords.accuracy > threshold) {
+          setTimeout(self.getLocation, 100)
+          return
+        }
+
+        // Toast(`accuracy: ${pos.coords.accuracy}`)
         let point = new BMap.Point(pos.coords.longitude, pos.coords.latitude)
         mp.centerAndZoom(point, 15)
+
+        let translate = (data) => {
+          if (data.status === 0) {
+            let marker = new BMap.Marker(data.points[0])
+            mp.addOverlay(marker)
+            let label = new BMap.Label("right", {
+              offset: new BMap.Size(20, -10),
+            })
+            marker.setLabel(label)
+            mp.setCenter(data.points[0])
+          }
+        }
+        let converter = new BMap.Convertor()
+        let pointArr = []
+        pointArr.push(point)
+        converter.translate(pointArr, 3, 5, translate)
+
+        let marker = new BMap.Marker(point)
+        mp.addOverlay(marker)
       }
 
       function onError(error) {
@@ -50,6 +81,7 @@ export default {
       navigator.geolocation.getCurrentPosition(onSuccess, onError, {
         timeout: 5000,
         enableHighAccuracy: true,
+        maximumAge: 1,
       })
     },
 
@@ -123,5 +155,10 @@ export default {
 
 #map
   height: 300px
+
+.lst
+  flex-wrap: wrap
+  >div
+    margin: 3px 3px
 
 </style>
