@@ -45,7 +45,6 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "css-loader": "^0.28.11",
-        "is-buffer": "^2.0.2",
         "npm-run-all": "^4.1.2",
         "pug": "^2.0.3",
         "style-loader": "^0.21.0",
