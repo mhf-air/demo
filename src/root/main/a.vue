@@ -10,12 +10,6 @@ div.root.g-v.j-c-center
       )
   mt-button.button(type="primary" @click="selectFile") 选择文件
   div#map
-  div.g-h.lst
-    div(
-        v-for="(item, i) in lst"
-        :key="i"
-        )
-        | {{ item }}
 </template>
 
 <script>
@@ -27,7 +21,6 @@ export default {
   data(){
     return {
       imgSrc: "",
-      lst: [],
     }
   },
   mounted() {
@@ -37,13 +30,20 @@ export default {
     mp.enableScrollWheelZoom()
   },
   methods: {
-    getLocation() {
+    getLocation(tryNum) {
+      if (!tryNum) {
+        tryNum = 0
+      } else {
+        tryNum++
+      }
       let self = this
       let threshold = 300
+      let maxTryNum = 10
       function onSuccess(pos) {
-        self.lst.push(pos.coords.accuracy)
-        if (pos.coords.accuracy > threshold) {
-          setTimeout(self.getLocation, 100)
+        if (pos.coords.accuracy > threshold && tryNum < maxTryNum) {
+          setTimeout(()={
+            self.getLocation(tryNum)
+          }, 100)
           return
         }
 
@@ -156,10 +156,5 @@ export default {
 
 #map
   height: 300px
-
-.lst
-  flex-wrap: wrap
-  >div
-    margin: 3px 3px
 
 </style>
