@@ -1,16 +1,16 @@
 <template lang="pug">
 div.root.g-v.j-c-center
-  mt-button(type="primary" @click="back") back
-  mt-button(type="danger" @click="addFile") add a file
-  ul
+  mt-header(title="内部存储")
+    mt-button(slot="left" icon="back" @click="back") 返回
+  //- mt-button(type="danger" @click="addFile") add a file
+  ul.list
     li.list-item(
         v-for="(item, i) in entryList"
         :key="i"
         )
       div.g-h.item(@click="click(item)")
-        span(v-if="item.isDir") d
-        span(v-else) f
-        span {{ item.name }}
+        div {{ item.name }}
+        div(v-if="item.isDir") >
   p(v-if="fileContent !== ''") {{ fileContent }}
 </template>
 
@@ -83,8 +83,9 @@ export default {
 
     click(item) {
       if (item.isDir) {
+        historyStack.push(currentURL)
+        currentURL = item.nativeURL
         this.listFiles(item.nativeURL)
-        historyStack.push(this.currentURL)
       } else {
         let onError = function(error) {
           console.log(`Failed because: ${error}`)
@@ -104,9 +105,9 @@ export default {
       if (historyStack.length === 0) {
         this.$router.go(-1)
       } else {
-        let oldURL = historyStack.pop()
-        console.log("old url is: " + oldURL)
-        this.listFiles(oldURL)
+        currentURL = historyStack.pop()
+        console.log("old url is: " + currentURL)
+        this.listFiles(currentURL)
       }
     },
 
@@ -133,7 +134,7 @@ export default {
   },
   created() {
     this.listFiles(this.$route.query.dir)
-    this.currentURL = this.$route.query.dir
+    currentURL = this.$route.query.dir
   },
 }
 </script>
@@ -152,15 +153,17 @@ export default {
 .a-i-center
   align-items: center
 
-.root
-  margin: 3rem 3rem
+.list
+  margin: 3px 3rem
 
 .list-item
   height: 2rem
-  margin-bottom: 1rem
-  background: cyan
+  margin-bottom: 2px
+  padding: 0 3px
 
 .item
   justify-content: space-between
+  border: 1px solid gray
+  border-radius: 5px
 
 </style>

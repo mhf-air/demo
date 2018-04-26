@@ -79,7 +79,7 @@ export default {
       }
 
       navigator.geolocation.getCurrentPosition(onSuccess, onError, {
-        timeout: 5000,
+        timeout: 10000,
         enableHighAccuracy: true,
         maximumAge: 1,
       })
@@ -124,7 +124,8 @@ export default {
       this.$router.push({
         path: "/file",
         query: {
-          dir: cordova.file.dataDirectory,
+          // dir: cordova.file.dataDirectory,
+          dir: cordova.file.externalRootDirectory,
         },
       })
     },
