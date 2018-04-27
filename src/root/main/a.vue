@@ -9,6 +9,7 @@ div.root.g-v.j-c-center
       width="100%"
       )
   mt-button.button(type="primary" @click="selectFile") 选择文件
+  div {{ message }}
   div#map
 </template>
 
@@ -21,6 +22,7 @@ export default {
   data(){
     return {
       imgSrc: "",
+      message: "",
     }
   },
   mounted() {
@@ -28,6 +30,32 @@ export default {
     let point = new BMap.Point(116.404, 39.915)
     mp.centerAndZoom(point, 11)
     mp.enableScrollWheelZoom()
+
+    try {
+      window.JPush.init()
+      window.Jpush.setDebugMode(true)
+      if (device.platform != "Android") {
+        window.JPush.setApplicationIconBadgeNumber(0)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+
+    let self = this
+
+    function onReceiveMessage(event) {
+      try {
+        if (device.platform === "Android") {
+          self.message = event.message
+        } else {
+          self.message = event.content
+        }
+      } catch(e) {
+        console.log("JPushPlugin:onReceiveMessage-->" + e)
+      }
+    }
+
+    document.addEventListner("jpush.receiveMessage", onReceiveMessage, false)
   },
   methods: {
     getLocation() {
