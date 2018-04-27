@@ -9,7 +9,7 @@
         "dev-b": "yarn run dev-js && cordova run browser",
         "dev-a": "yarn run dev-js && cordova run android",
         "p-js": "webpack --config build/webpack.production.js",
-        "p-a": "yarn run p-js && cordova build android",
+        "p-a": "yarn run p-js && cordova build --release android",
         "dev": "webpack-dev-server --config build/webpack.dev.js --open"
     },
     "author": "Apache Cordova Team",
