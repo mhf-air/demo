@@ -7,6 +7,7 @@ g-v(j-c="center")
     mt-button.button(type="primary" @click="getLocation") 获取位置
     mt-button.button(type="danger" @click="selectPicture") 选择图片
     mt-button.button(type="danger" @click="capturePicture") 拍照
+    mt-button.button(type="danger" @click="scanQRCode") 扫描二维码
     img.showImg(
         :src="imgSrc"
         v-if="imgSrc !== ''"
@@ -145,6 +146,21 @@ export default {
         sourceType: Camera.PictureSourceType.CAMERA,
         correctOrientation: true,
       })
+    },
+
+    scanQRCode() {
+      function onSuccess(result) {
+        Toast(`
+          Result: ${result.text},
+          Format: ${result.format}
+        `)
+      }
+
+      function onError(error) {
+        Toast(`Failed because: ${error}`)
+      }
+
+      cordova.plugins.barcodeScanner.scan(onSuccess, onError)
     },
 
     selectFile() {
