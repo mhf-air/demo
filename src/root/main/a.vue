@@ -54,7 +54,9 @@ export default {
         } else {
           self.message = event.content
         }
+        Toast(self.message)
       } catch(e) {
+        Toast("JPushPlugin:onReceiveMessage-->" + e)
         console.log("JPushPlugin:onReceiveMessage-->" + e)
       }
     }

@@ -1,5 +1,5 @@
 <template lang="pug">
-g-v
+g-v(j-c="center")
   mt-header(title="图表")
     mt-button(slot="left" icon="back" @click="$router.go(-1)") 返回
   div#main-chart
@@ -46,6 +46,6 @@ export default {
 
 <style lang="stylus" scoped>
 #main-chart
-  width: 400px
+  width: 350px
   height: 300px
 </style>
