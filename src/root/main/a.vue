@@ -13,7 +13,7 @@ g-v(j-c="center")
         width="100%"
         )
     mt-button.button(type="primary" @click="selectFile") 选择文件
-    div {{ message }}
+    div(v-if="message !== ''") 接收到推送 {{ message }}
     div#map
 </template>
 
@@ -47,21 +47,19 @@ export default {
 
     let self = this
 
-    function onReceiveMessage(event) {
+    function onReceiveNotification(event) {
       try {
         if (device.platform === "Android") {
-          self.message = event.message
+          self.message = event.alert
         } else {
-          self.message = event.content
+          self.message = event.aps.alert
         }
-        Toast(self.message)
       } catch(e) {
-        Toast("JPushPlugin:onReceiveMessage-->" + e)
-        console.log("JPushPlugin:onReceiveMessage-->" + e)
+        console.log("JPushPlugin:onReceiveN-->" + e)
       }
     }
 
-    document.addEventListener("jpush.receiveMessage", onReceiveMessage, false)
+    document.addEventListener("jpush.receiveNotification", onReceiveNotification, false)
   },
   methods: {
     getLocation() {
