@@ -123,10 +123,6 @@ li {
   list-style-type: none;
 }
 
-.g-page-center {
-  padding: 0 calc(50% - 38rem);
-}
-
 .g-absolute {
   position: absolute;
 }

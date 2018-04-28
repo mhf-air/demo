@@ -24,6 +24,10 @@ import MintUI from "mint-ui"
 import "mint-ui/lib/style.css"
 Vue.use(MintUI)
 
+// app specific components
+import Components from "./components"
+Vue.use(Components)
+
 // root
 new Vue({
   router,

@@ -1,16 +1,20 @@
 <template lang="pug">
-div.root.g-v.j-c-center
-  mt-button.button(type="primary" @click="getLocation") 获取位置
-  mt-button.button(type="danger" @click="selectPicture") 选择图片
-  mt-button.button(type="danger" @click="capturePicture") 拍照
-  img.showImg(
-      :src="imgSrc"
-      v-if="imgSrc !== ''"
-      width="100%"
-      )
-  mt-button.button(type="primary" @click="selectFile") 选择文件
-  div {{ message }}
-  div#map
+g-v(j-c="center")
+  mt-header.header(title="Demo")
+  g-v.content(j-c="center")
+    router-link(to="/chart").chart
+      mt-button.button(type="danger") 图表
+    mt-button.button(type="primary" @click="getLocation") 获取位置
+    mt-button.button(type="danger" @click="selectPicture") 选择图片
+    mt-button.button(type="danger" @click="capturePicture") 拍照
+    img.showImg(
+        :src="imgSrc"
+        v-if="imgSrc !== ''"
+        width="100%"
+        )
+    mt-button.button(type="primary" @click="selectFile") 选择文件
+    div {{ message }}
+    div#map
 </template>
 
 <script>
@@ -55,7 +59,7 @@ export default {
       }
     }
 
-    document.addEventListner("jpush.receiveMessage", onReceiveMessage, false)
+    document.addEventListener("jpush.receiveMessage", onReceiveMessage, false)
   },
   methods: {
     getLocation() {
@@ -158,21 +162,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.g-h
-  display: flex
+.header
+  font-size: 20px
+  padding: 30px 0
+  color: black
 
-.g-v
-  display: flex
-  flex-direction: column
-
-.j-c-center
-  justify-content: center
-
-.a-i-center
-  align-items: center
-
-.root
+.content
   margin: 3rem 3rem
+
+.chart
+  width: 100%
+  >.button
+    width: 100%
 
 .button
   margin: 1rem 0

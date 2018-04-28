@@ -1,5 +1,5 @@
 <template lang="pug">
-div.root.g-v.j-c-center
+g-v.root(j-c="center")
   mt-header(title="内部存储")
     mt-button(slot="left" icon="back" @click="back") 返回
   //- mt-button(type="danger" @click="addFile") add a file
@@ -8,7 +8,7 @@ div.root.g-v.j-c-center
         v-for="(item, i) in entryList"
         :key="i"
         )
-      div.g-h.item(@click="click(item)")
+      g-h.item(j-c="space-between" @click.native="click(item)")
         div {{ item.name }}
         div(v-if="item.isDir") >
   p(v-if="fileContent !== ''") {{ fileContent }}
@@ -140,19 +140,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.g-h
-  display: flex
-
-.g-v
-  display: flex
-  flex-direction: column
-
-.j-c-center
-  justify-content: center
-
-.a-i-center
-  align-items: center
-
 .list
   margin: 3px 3rem
 
@@ -162,7 +149,6 @@ export default {
   padding: 0 3px
 
 .item
-  justify-content: space-between
   border: 1px solid gray
   border-radius: 5px
 
