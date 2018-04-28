@@ -61,6 +61,9 @@ export default {
     }
 
     document.addEventListener("jpush.receiveNotification", onReceiveNotification, false)
+
+    // hide the splash screen when main page is ready
+    navigator.splashscreen.hide()
   },
   methods: {
     getLocation() {
