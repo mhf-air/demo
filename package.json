@@ -27,6 +27,7 @@
         "echarts": "^4.0.4",
         "jpush-phonegap-plugin": "^3.4.2",
         "mint-ui": "^2.2.13",
+        "phonegap-plugin-barcodescanner": "^7.1.1",
         "vue": "^2.5.16",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1"
@@ -39,6 +40,9 @@
             "cordova-plugin-geolocation": {},
             "jpush-phonegap-plugin": {
                 "APP_KEY": "f4019e6f2125fc7a8e414d19"
+            },
+            "phonegap-plugin-barcodescanner": {
+                "ANDROID_SUPPORT_V4_VERSION": "27.+"
             }
         },
         "platforms": [
