@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "my-release-key.jks",
+            "storePassword": "mhfdemo123",
+            "alias": "my-alias",
+            "password" : "mhfdemo123",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "my-release-key.jks",
+            "storePassword": "mhfdemo123",
+            "alias": "my-alias",
+            "password" : "mhfdemo123",
+            "keystoreType": ""
+        }
+    }
+}

@@ -9,7 +9,10 @@
         "dev-b": "yarn run dev-js && cordova run browser",
         "dev-a": "yarn run dev-js && cordova run android",
         "p-js": "webpack --config build/webpack.production.js",
-        "p-a": "yarn run p-js && cordova build android",
+        "p-a": "yarn run p-js && cordova build android && yarn run dev-cp-apk",
+        "dev-cp-apk": "cp platforms/android/app/build/outputs/apk/debug/app-debug.apk /run/user/1000/gvfs/*/内部存储设备/360",
+        "p-cp-apk": "cp platforms/android/app/build/outputs/apk/release/app-release.apk /run/user/1000/gvfs/*/内部存储设备/360",
+        "p-sign": "yarn run p-js && cordova build android --release --buildConfig=key/build.json && yarn run p-cp-apk",
         "dev": "webpack-dev-server --config build/webpack.dev.js --open"
     },
     "author": "Apache Cordova Team",
