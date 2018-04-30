@@ -1,8 +1,12 @@
 <template lang="pug">
-g-v(j-c="center")
-  mt-header(title="图表")
+g-v(j-c="center" a-i="center")
+  mt-header(title="图表").header
     mt-button(slot="left" icon="back" @click="$router.go(-1)") 返回
+
   div#main-chart
+
+  div 倒计时
+  g-count-down(:hour="1" :minute="1" :second="10")
 </template>
 
 <script>
@@ -45,7 +49,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.header
+  width: 100%
+
 #main-chart
-  width: 350px
+  width: 400px
   height: 300px
 </style>

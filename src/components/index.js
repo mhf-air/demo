@@ -27,13 +27,18 @@ import H from "./basic/h.vue"
 // notice
 
 // other
+import CountDown from "./other/count-down.vue"
 
 export {
   V,
   H,
+
+  CountDown,
 }
 
 const components = [
   V,
   H,
+
+  CountDown,
 ]
