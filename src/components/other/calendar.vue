@@ -90,8 +90,6 @@ export default {
         newList[Math.floor(i/7)].push(lst[i])
       }
 
-      console.log(newList)
-
       return newList
     },
   },

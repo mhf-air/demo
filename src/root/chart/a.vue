@@ -7,6 +7,15 @@ g-v(j-c="center" a-i="center")
 
   div#main-chart
 
+  g-h
+    div.tab-header alice
+    div.tab-header bob
+    div.tab-header cat
+    div.tab-header dog
+    div.tab-header egg
+    div.tab-header fish
+    div.tab-header good
+
   div 倒计时
   g-count-down(:hour="1" :minute="1" :second="10")
 
@@ -39,6 +48,7 @@ export default {
   data() {
     return {
       entryList: [],
+      active: "tab2",
     }
   },
   methods: {
@@ -98,4 +108,8 @@ export default {
 .mint-swipe-indicator
   background: red
   color: red
+
+.tab-header
+  padding: 10px 20px
+
 </style>
