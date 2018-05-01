@@ -30,12 +30,28 @@ export default {
       message: "",
     }
   },
+
   mounted() {
+    // hide the splash screen when main page is ready
+    navigator.splashscreen.hide()
+
+    // check if this is a new version
+    const curVersionNum = "1.0.0"
+    let v = window.localStorage.getItem("versionNum")
+    console.log("v: " + v)
+    if (v !== curVersionNum) {
+      window.localStorage.setItem("versionNum", curVersionNum)
+      this.$router.replace("/chart")
+      return
+    }
+
+    // init baidu map
     mp = new BMap.Map("map")
     let point = new BMap.Point(116.404, 39.915)
     mp.centerAndZoom(point, 11)
     mp.enableScrollWheelZoom()
 
+    // init jpush
     try {
       window.JPush.init()
       window.Jpush.setDebugMode(true)
@@ -61,10 +77,8 @@ export default {
     }
 
     document.addEventListener("jpush.receiveNotification", onReceiveNotification, false)
-
-    // hide the splash screen when main page is ready
-    navigator.splashscreen.hide()
   },
+
   methods: {
     getLocation() {
       let self = this

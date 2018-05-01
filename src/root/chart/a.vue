@@ -3,10 +3,27 @@ g-v(j-c="center" a-i="center")
   mt-header(title="图表").header
     mt-button(slot="left" icon="back" @click="$router.go(-1)") 返回
 
+  //- mt-button(@click="$router.replace('/')") back
+
   div#main-chart
 
   div 倒计时
   g-count-down(:hour="1" :minute="1" :second="10")
+
+  div swipe
+  mt-swipe.swipe(:auto="0")
+    mt-swipe-item.item
+      g-h(j-c="center" a-i="center")
+        div 第一个页面
+    mt-swipe-item.item
+      g-h(j-c="center" a-i="center")
+        div 第二个页面
+    mt-swipe-item.item
+      g-h(j-c="center" a-i="center")
+        div 第三个页面
+    mt-swipe-item.item
+      g-h(j-c="center" a-i="center")
+        div 第四个页面
 </template>
 
 <script>
@@ -53,6 +70,28 @@ export default {
   width: 100%
 
 #main-chart
-  width: 400px
+  width: 100%
   height: 300px
+  margin: 10px
+
+.swipe
+  width: 100%
+  height: 150px
+
+.item
+  display: flex
+  >.g-h
+    height: 100%
+
+.item:nth-child(2n+1)
+    background: cyan
+
+.item:nth-child(2n)
+    background: yellow
+</style>
+
+<style lang="stylus">
+.mint-swipe-indicator
+  background: red
+  color: red
 </style>
