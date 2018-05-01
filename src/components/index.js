@@ -28,12 +28,14 @@ import H from "./basic/h.vue"
 
 // other
 import CountDown from "./other/count-down.vue"
+import Calendar from "./other/calendar.vue"
 
 export {
   V,
   H,
 
   CountDown,
+  Calendar,
 }
 
 const components = [
@@ -41,4 +43,5 @@ const components = [
   H,
 
   CountDown,
+  Calendar,
 ]

@@ -24,6 +24,10 @@ g-v(j-c="center" a-i="center")
     mt-swipe-item.item
       g-h(j-c="center" a-i="center")
         div 第四个页面
+
+  div 日历
+  g-calendar
+
 </template>
 
 <script>

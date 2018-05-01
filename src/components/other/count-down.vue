@@ -54,10 +54,10 @@ export default {
 
 <style lang="stylus" scoped>
 .item
-  display: flex
   padding: 1em
   margin: 1em
   width: 3em
   border: 1px solid
+  text-align: center
 
 </style>
