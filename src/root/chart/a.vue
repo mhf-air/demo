@@ -7,15 +7,6 @@ g-v(j-c="center" a-i="center")
 
   div#main-chart
 
-  g-h
-    div.tab-header alice
-    div.tab-header bob
-    div.tab-header cat
-    div.tab-header dog
-    div.tab-header egg
-    div.tab-header fish
-    div.tab-header good
-
   div 倒计时
   g-count-down(:hour="1" :minute="1" :second="10")
 
@@ -34,8 +25,23 @@ g-v(j-c="center" a-i="center")
       g-h(j-c="center" a-i="center")
         div 第四个页面
 
-  div 日历
-  g-calendar
+  g-h.tab-bar(a-i="center" @click.native="selectTab")
+    div(id="calendar" :class="{'tab-is-active': active === 'calendar'}") 日历
+    div(id="ding" :class="{'tab-is-active': active === 'ding'}") DING
+    div(id="task" :class="{'tab-is-active': active === 'task'}") 任务
+    div(id="meeting" :class="{'tab-is-active': active === 'meeting'}") 会议
+    div(id="trashbin" :class="{'tab-is-active': active === 'trashbin'}") 回收站
+  mt-tab-container(v-model="active")
+    mt-tab-container-item(id="calendar")
+      g-calendar
+    mt-tab-container-item(id="ding")
+      div 新建日程
+    mt-tab-container-item(id="task")
+      div 新建任务
+    mt-tab-container-item(id="meeting")
+      div 自动统计参会人员
+    mt-tab-container-item(id="trashbin")
+      div 暂无已删除的内容
 
 </template>
 
@@ -48,11 +54,12 @@ export default {
   data() {
     return {
       entryList: [],
-      active: "tab2",
+      active: "calendar",
     }
   },
   methods: {
-    click() {
+    selectTab(e) {
+      this.active = e.target.id
     },
   },
   mounted() {
@@ -109,7 +116,19 @@ export default {
   background: red
   color: red
 
-.tab-header
-  padding: 10px 20px
+.tab-bar
+  margin-top: 1em
+  width: 100%
+  white-space: nowrap
+  overflow: scroll
+  &::-webkit-scrollbar
+    display: none
 
+  >div
+    width: 200em
+    padding: 10px 20px
+    font-size: 18px
+
+.tab-is-active
+  border-bottom: 1px solid blue
 </style>

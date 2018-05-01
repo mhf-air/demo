@@ -1,7 +1,5 @@
 <template lang="pug">
 g-v
-  mt-button(@click="prev") 上个月
-  mt-button(@click="next") 下个月
   g-h.header
     div.header-item(
         v-for="(item, i) in header"
@@ -24,6 +22,8 @@ g-v
               }`
             )
           | {{ day.day }}
+  mt-button(@click="prev") 上个月
+  mt-button(@click="next") 下个月
 
 </template>
 
@@ -124,10 +124,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "../../root/common.styl"
+
 .header-item
   padding: 7px
   margin: 1px 5px
   width: 35px
+  color: gray
 
 .day
   padding: 7px
@@ -136,6 +139,6 @@ export default {
   text-align: center
 
 .not-in-current-month
-  color: gray
+  color: grey400
 
 </style>

@@ -38,7 +38,6 @@ export default {
     // check if this is a new version
     const curVersionNum = "1.0.0"
     let v = window.localStorage.getItem("versionNum")
-    console.log("v: " + v)
     if (v !== curVersionNum) {
       window.localStorage.setItem("versionNum", curVersionNum)
       this.$router.replace("/chart")
