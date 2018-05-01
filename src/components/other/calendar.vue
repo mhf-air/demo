@@ -1,5 +1,7 @@
 <template lang="pug">
 g-v
+  mt-button(@click="prev") 上个月
+  mt-button(@click="next") 下个月
   g-h.header
     div.header-item(
         v-for="(item, i) in header"
@@ -99,6 +101,22 @@ export default {
       this.year = now.getFullYear()
       this.month = now.getMonth() + 1
       this.date = now.getDate()
+    },
+    prev() {
+      if (this.month === 0) {
+        this.year--
+        this.month = 11
+      } else {
+        this.month--
+      }
+    },
+    next() {
+      if (this.month === 11) {
+        this.year++
+        this.month = 0
+      } else {
+        this.month++
+      }
     },
   },
   created() {
