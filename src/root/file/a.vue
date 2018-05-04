@@ -54,6 +54,14 @@ export default {
       fileContent: "",
     }
   },
+
+  mounted() {
+    document.addEventListener("backbutton", this.back, false)
+  },
+  beforeDestroy() {
+    document.removeEventListener("backbutton", this.back, false)
+  },
+
   methods: {
     listFiles(dirName) {
       let addFileEntry = (dirEntry) => {

@@ -24,7 +24,7 @@ import { Toast } from "mint-ui"
 let mp = null
 
 export default {
-  data(){
+  data() {
     return {
       imgSrc: "",
       message: "",
@@ -74,6 +74,10 @@ export default {
     }
 
     document.addEventListener("jpush.receiveNotification", onReceiveNotification, false)
+  },
+
+  // for cleaning resources
+  beforeDestroy() {
   },
 
   methods: {
