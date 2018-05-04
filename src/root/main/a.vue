@@ -61,14 +61,12 @@ export default {
       console.log(e)
     }
 
-    let self = this
-
-    function onReceiveNotification(event) {
+    let onReceiveNotification = (event) => {
       try {
         if (device.platform === "Android") {
-          self.message = event.alert
+          this.message = event.alert
         } else {
-          self.message = event.aps.alert
+          this.message = event.aps.alert
         }
       } catch(e) {
         console.log("JPushPlugin:onReceiveN-->" + e)
@@ -80,12 +78,11 @@ export default {
 
   methods: {
     getLocation() {
-      let self = this
       // let threshold = 300
-      function onSuccess(pos) {
+      let onSuccess = (pos) => {
         /* if (pos.coords.accuracy > threshold) {
           setTimeout(() => {
-            self.getLocation()
+            this.getLocation()
           }, 100)
           return
         } */
@@ -115,7 +112,7 @@ export default {
         mp.setCenter(data.points[0]) */
       }
 
-      function onError(error) {
+      let onError = (error) => {
         console.log(`
           code: ${error.code},
           message: ${error.message}
@@ -130,12 +127,11 @@ export default {
     },
 
     selectPicture() {
-      let self = this
-      function onSuccess(imageUri) {
-        self.imgSrc = imageUri
+      let onSuccess = (imageUri) => {
+        this.imgSrc = imageUri
       }
 
-      function onError(error) {
+      let onError = (error) => {
         Toast(`Failed because: ${error}`)
       }
 
@@ -147,12 +143,11 @@ export default {
     },
 
     capturePicture() {
-      let self = this
-      function onSuccess(imageUri) {
-        self.imgSrc = imageUri
+      let onSuccess = (imageUri) => {
+        this.imgSrc = imageUri
       }
 
-      function onError(error) {
+      let onError = (error) => {
         Toast(`Failed because: ${error}`)
       }
 
@@ -165,14 +160,14 @@ export default {
     },
 
     scanQRCode() {
-      function onSuccess(result) {
+      let onSuccess = (result) => {
         Toast(`
           Result: ${result.text},
           Format: ${result.format}
         `)
       }
 
-      function onError(error) {
+      let onError = (error) => {
         Toast(`Failed because: ${error}`)
       }
 

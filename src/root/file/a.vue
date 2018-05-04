@@ -20,7 +20,7 @@ import { Toast } from "mint-ui"
 let historyStack = []
 let currentURL = ""
 
-function writeFile(fileEntry, data, onSuccess, onError) {
+let writeFile = (fileEntry, data, onSuccess, onError) => {
   fileEntry.createWriter((fileWriter) => {
     fileWriter.onwriteend = onSuccess
     if (!onError) {
@@ -33,9 +33,9 @@ function writeFile(fileEntry, data, onSuccess, onError) {
   })
 }
 
-function readFile(fileEntry, onSuccess, onError) {
+let readFile = (fileEntry, onSuccess, onError) => {
   if (!onError) {
-    onError = function(error) {
+    onError = (error) => {
       console.log(`Failed because: ${error}`)
     }
   }
@@ -56,9 +56,7 @@ export default {
   },
   methods: {
     listFiles(dirName) {
-      let self = this
-
-      function addFileEntry(dirEntry) {
+      let addFileEntry = (dirEntry) => {
         let lst = []
         let dirReader = dirEntry.createReader()
         dirReader.readEntries((entryList) => {
@@ -71,10 +69,10 @@ export default {
             })
           }
         })
-        self.entryList = lst
+        this.entryList = lst
       }
 
-      function onError(error) {
+      let onError = (error) => {
         console.log(`Failed because: ${error}`)
       }
 
@@ -87,14 +85,13 @@ export default {
         currentURL = item.nativeURL
         this.listFiles(item.nativeURL)
       } else {
-        let onError = function(error) {
+        let onError = (error) => {
           console.log(`Failed because: ${error}`)
         }
-        let self = this
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (localFs) => {
           localFs.root.getFile("hello.txt", {}, (fileEntry) => {
-            readFile(fileEntry, function() {
-              self.fileContent = this.result
+            readFile(fileEntry, () => {
+              this.fileContent = this.result
             })
           }, onError)
         }, onError)
@@ -112,10 +109,9 @@ export default {
     },
 
     addFile() {
-      function onError(error) {
+      let onError = (error) => {
         console.log(`Failed because: ${error}`)
       }
-      let self = this
 
       window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, (localFs) => {
         localFs.root.getFile("hello.txt", {
@@ -123,8 +119,8 @@ export default {
           exclusive: false,
         }, (fileEntry) => {
           writeFile(fileEntry, "hello", () => {
-            readFile(fileEntry, function() {
-              self.fileContent = this.result
+            readFile(fileEntry, () => {
+              this.fileContent = this.result
             })
           })
         }, onError)
