@@ -8,6 +8,7 @@ g-v(j-c="center" a-i="center")
   div#main-chart
 
   mt-button(@click="toggleStatusBar") 切换状态栏
+  mt-button(@click="showWebPage") 显示网页
 
   div 倒计时
   g-count-down(:hour="1" :minute="1" :second="10")
@@ -51,6 +52,7 @@ g-v(j-c="center" a-i="center")
 import * as echarts from "echarts"
 
 let chart = null
+let browser = null
 
 export default {
   data() {
@@ -71,6 +73,15 @@ export default {
         StatusBar.hide()
       }
       this.statusBarHidden = !this.statusBarHidden
+    },
+    showWebPage() {
+      let target = "_blank"
+      let options = "location=no"
+      let url = "https://www.sogou.com"
+
+      browser = cordova.InAppBrowser.open(url, target, options)
+      // browser.addEventListener("loadstart", () => {
+      // })
     },
   },
   mounted() {
@@ -113,7 +124,7 @@ export default {
 #main-chart
   width: 100%
   height: 300px
-  margin: 10px
+  margin: 10px 5px
 
 .swipe
   width: 100%
