@@ -7,6 +7,8 @@ g-v(j-c="center" a-i="center")
 
   div#main-chart
 
+  mt-button(@click="toggleStatusBar") 切换状态栏
+
   div 倒计时
   g-count-down(:hour="1" :minute="1" :second="10")
 
@@ -55,14 +57,27 @@ export default {
     return {
       entryList: [],
       active: "calendar",
+      statusBarHidden: false,
     }
   },
   methods: {
     selectTab(e) {
       this.active = e.target.id
     },
+    toggleStatusBar() {
+      if (this.statusBarHidden) {
+        StatusBar.show()
+      } else {
+        StatusBar.hide()
+      }
+      this.statusBarHidden = !this.statusBarHidden
+    },
   },
   mounted() {
+    if (cordova.platformId === "android") {
+      StatusBar.backgroundColorByHexString("#ff6700")
+    }
+
     chart = echarts.init(document.getElementById("main-chart"))
     chart.setOption({
       title: {
@@ -82,6 +97,11 @@ export default {
         data: [5, 20, 36, 10, 10, 20],
       }],
     })
+  },
+  beforeDestroy() {
+    if (cordova.platformId === "android") {
+      StatusBar.backgroundColorByHexString("#000")
+    }
   },
 }
 </script>
