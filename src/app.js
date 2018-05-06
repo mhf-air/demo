@@ -33,5 +33,34 @@ new Vue({
   router,
   // store,
   el: "#app",
-  render: (h) => h("router-view"),
+  data() {
+    return {
+      transitionName: "",
+    }
+  },
+  render(h) {
+    return h("transition", {
+      props: {
+        name: this.transitionName,
+      },
+    }, [
+      h("router-view"),
+    ])
+  },
+  watch: {
+    "$route" (to, from) {
+      // "/".split("/") ==> ["", ""]
+      // "/chart".split("/") ==> ["", "chart"]
+
+      let toDepth = to.path.split("/").length - 1
+      let fromDepth = from.path.split("/").length - 1
+      if (to.path === "/") {
+        toDepth--
+      }
+      if (from.path === "/") {
+        fromDepth--
+      }
+      this.transitionName = toDepth < fromDepth ? "g-slide-right" : "g-slide-left"
+    },
+  },
 })
