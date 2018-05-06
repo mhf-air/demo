@@ -55,8 +55,8 @@
             "cordova-plugin-inappbrowser": {}
         },
         "platforms": [
-            "android",
-            "browser"
+            "browser",
+            "android"
         ]
     },
     "devDependencies": {
@@ -66,9 +66,6 @@
         "babel-preset-env": "^1.6.1",
         "chalk": "^2.4.1",
         "css-loader": "^0.28.11",
-        "debug": "^3.1.0",
-        "is-buffer": "^2.0.2",
-        "ms": "^2.1.1",
         "npm-run-all": "^4.1.2",
         "pug": "^2.0.3",
         "style-loader": "^0.21.0",
