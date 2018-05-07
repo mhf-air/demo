@@ -60,7 +60,7 @@ new Vue({
       if (from.path === "/") {
         fromDepth--
       }
-      this.transitionName = toDepth < fromDepth ? "g-slide-right" : "g-slide-left"
+      this.transitionName = toDepth < fromDepth ? "g-slide-left" : "g-slide-right"
     },
   },
 })

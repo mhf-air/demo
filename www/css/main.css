@@ -135,13 +135,13 @@ li {
 
 .g-slide-left-enter,
 .g-slide-left-leave-to {
-  opacity: 0;
+  /* opacity: 0; */
   transform: translate(-100%, 0);
 }
 
 .g-slide-right-enter,
 .g-slide-right-leave-to {
-  opacity: 0;
+  /* opacity: 0; */
   transform: translate(100%, 0);
 }
 
