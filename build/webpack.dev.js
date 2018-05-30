@@ -9,33 +9,33 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, "../www"),
     historyApiFallback: true,
     publicPath: "/js/",
-  },
-  historyApiFallback: {
-    rewrites: [{
-        from: /\.js$/,
-        to(context) {
-          let p = context.parsedUrl.path
-          let i = p.indexOf("/js/")
-          return p.substring(i + 1)
+    historyApiFallback: {
+      rewrites: [{
+          from: /\.js$/,
+          to(context) {
+            let p = context.parsedUrl.path
+            let i = p.indexOf("/js/")
+            return p.substring(i + 1)
+          },
         },
-      },
-      {
-        from: /\.css$/,
-        to(context) {
-          let p = context.parsedUrl.path
-          let i = p.indexOf("/css/")
-          return p.substring(i + 1)
+        {
+          from: /\.css$/,
+          to(context) {
+            let p = context.parsedUrl.path
+            let i = p.indexOf("/css/")
+            return p.substring(i + 1)
+          },
         },
-      },
-      {
-        from: /\/img\//,
-        to(context) {
-          let p = context.parsedUrl.path
-          let i = p.indexOf("/img/")
-          return p.substring(i + 1)
+        {
+          from: /\/img\//,
+          to(context) {
+            let p = context.parsedUrl.path
+            let i = p.indexOf("/img/")
+            return p.substring(i + 1)
+          },
         },
-      },
-      // { from: /./, to: "index.html" },
-    ],
+        // { from: /./, to: "index.html" },
+      ],
+    },
   },
 })
