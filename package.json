@@ -13,7 +13,9 @@
         "dev-cp-apk": "cp platforms/android/app/build/outputs/apk/debug/app-debug.apk /run/user/1000/gvfs/*/内部存储设备/360",
         "p-cp-apk": "cp platforms/android/app/build/outputs/apk/release/app-release.apk /run/user/1000/gvfs/*/内部存储设备/360",
         "p-sign": "yarn run p-js && cordova build android --release --buildConfig=key/build.json && yarn run p-cp-apk",
-        "dev": "webpack-dev-server --config build/webpack.dev.js --open"
+        "dev-server": "webpack-dev-server --config build/webpack.dev.js --open",
+        "dev-watch": "webpack --config build/webpack.dev.js --watch",
+        "dev": "npm-run-all -p dev-server dev-watch"
     },
     "author": "Apache Cordova Team",
     "license": "Apache-2.0",

@@ -28,7 +28,6 @@ module.exports = {
       }
     ],
   },
-  stats: "minimal",
 
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
